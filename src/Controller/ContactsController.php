@@ -145,6 +145,9 @@ class ContactsController extends AppController {
 			'contain' => ['Zips', 'Contactsources', 'Groups', 'Skills', 'Users', 'Histories']
 		]);
 		$this->set('contact', $contact);
+    
+    $duplicates = $this->Contacts->checkDuplicates($id);
+    $this->set(compact('duplicates'));
 		
 		$family = $this->Contacts->find()
 				->where(['family_id' => $contact->family_id]);
